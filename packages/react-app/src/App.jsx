@@ -218,7 +218,15 @@ function App(props) {
 
   let faucetHint = ""
   const [ faucetClicked, setFaucetClicked ] = useState( false );
-    if(!faucetClicked&&localProvider&&localProvider._network&&localProvider._network.chainId==31337&&yourLocalBalance&&formatEther(yourLocalBalance)<=0){
+
+  if (
+    !faucetClicked
+    && localProvider
+    && localProvider._network
+    && localProvider._network.chainId==31337
+    && yourLocalBalance
+    && formatEther(yourLocalBalance)<=0
+  ) {
     faucetHint = (
       <div style={{padding:16}}>
         <Button type={"secondary"} onClick={()=>{
@@ -320,40 +328,12 @@ function App(props) {
                           ensProvider={mainnetProvider}
                           fontSize={16}
                         /> =>
-                        <Balance
-                          balance={item[1]}
-
-                        />
-
+                        <Balance balance={item[1]} />
                     </List.Item>
                   )
                 }}
               />
             </div>
-
-
-
-
-            { /* uncomment for a second contract:
-            <Contract
-              name="SecondContract"
-              signer={userProvider.getSigner()}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-            />
-            */ }
-
-            { /* Uncomment to display and interact with an external contract (DAI on mainnet):
-            <Contract
-              name="DAI"
-              customContract={mainnetDAIContract}
-              signer={userProvider.getSigner()}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-            />
-            */ }
           </Route>
           <Route path="/contracts">
             <Contract
@@ -379,7 +359,7 @@ function App(props) {
 
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
-      <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
+       <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 0 }}>
          <Account
            address={address}
            localProvider={localProvider}
