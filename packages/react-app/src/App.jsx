@@ -7,11 +7,29 @@ import { Row, Col, Button, Menu, Alert, List } from "antd";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
-import { useExchangePrice, useGasPrice, useUserProvider, useContractLoader, useContractReader, useEventListener, useBalance, useExternalContractLoader } from "./hooks";
-import { Header, Account, Faucet, Ramp, Contract, GasGauge, Balance, Address } from "./components";
+// import QDSO from "views/QDSO";
+import {
+  useExchangePrice,
+  useGasPrice,
+  useUserProvider,
+  useContractLoader,
+  useContractReader,
+  useEventListener,
+  useBalance,
+  useExternalContractLoader
+} from "./hooks";
+import {
+  Account,
+  Faucet,
+  Ramp,
+  Contract,
+  GasGauge,
+  Balance,
+  Address
+} from "./components";
 import { Transactor } from "./helpers";
 import { formatEther, parseEther } from "@ethersproject/units";
-import { Hints, ExampleUI, Subgraph } from "./views"
+import { Hints, ExampleUI, Subgraph, QDSO } from "./views"
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 const humanizeDuration = require("humanize-duration");
 /*
@@ -104,7 +122,7 @@ function App(props) {
   //
   // If you want to bring in the mainnet DAI contract it would look like:
   //const mainnetDAIContract = useExternalContractLoader(mainnetProvider, DAI_ADDRESS, DAI_ABI)
-  //console.log("🥇DAI contract on mainnet:",mainnetDAIContract)
+  //consol  e.log("🥇DAI contract on mainnet:",mainnetDAIContract)
   //
   // Then read your DAI balance like:
   //const myMainnetBalance = useContractReader({DAI: mainnetDAIContract},"DAI", "balanceOf",["0x34aA3F359A9D614239015126635CE7732c18fDF3"])
@@ -203,36 +221,33 @@ function App(props) {
     if(!faucetClicked&&localProvider&&localProvider._network&&localProvider._network.chainId==31337&&yourLocalBalance&&formatEther(yourLocalBalance)<=0){
     faucetHint = (
       <div style={{padding:16}}>
-        <Button type={"primary"} onClick={()=>{
+        <Button type={"secondary"} onClick={()=>{
           faucetTx({
             to: address,
             value: parseEther("0.01"),
           });
           setFaucetClicked(true)
         }}>
-          💰 Grab funds from the faucet ⛽️
+          faucet
         </Button>
       </div>
     )
   }
 
-
-
-
   return (
     <div className="App">
-
-      {/* ✏️ Edit the header and change the title to your project name */}
-      <Header />
       {networkDisplay}
       <BrowserRouter>
 
-        <Menu style={{ textAlign:"center" }} selectedKeys={[route]} mode="horizontal">
+        <Menu style={{ textAlign:"left" }} selectedKeys={[route]} mode="horizontal">
           <Menu.Item key="/">
             <Link onClick={()=>{setRoute("/")}} to="/">Staker UI</Link>
           </Menu.Item>
           <Menu.Item key="/contracts">
             <Link onClick={()=>{setRoute("/contracts")}} to="/contracts">Debug Contracts</Link>
+          </Menu.Item>
+          <Menu.Item key="/qdso">
+            <Link onClick={() => setRoute("/qdso")} to="/qdso">QDSO</Link>
           </Menu.Item>
         </Menu>
 
@@ -356,6 +371,9 @@ function App(props) {
               blockExplorer={blockExplorer}
             />
           </Route>
+          <Route path="/qdso">
+            <QDSO />
+          </Route>
         </Switch>
       </BrowserRouter>
 
@@ -375,55 +393,6 @@ function App(props) {
          />
          {faucetHint}
       </div>
-
-      <div style={{marginTop:32,opacity:0.5}}>Created by <Address
-        value={"Your...address"}
-        ensProvider={mainnetProvider}
-        fontSize={16}
-      /></div>
-
-      <div style={{marginTop:32,opacity:0.5}}><a target="_blank" style={{padding:32,color:"#000"}} href="https://github.com/austintgriffith/scaffold-eth">🍴 Fork me!</a></div>
-
-      {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-         <Row align="middle" gutter={[4, 4]}>
-           <Col span={8}>
-             <Ramp price={price} address={address} networks={NETWORKS}/>
-           </Col>
-
-           <Col span={8} style={{ textAlign: "center", opacity: 0.8 }}>
-             <GasGauge gasPrice={gasPrice} />
-           </Col>
-           <Col span={8} style={{ textAlign: "center", opacity: 1 }}>
-             <Button
-               onClick={() => {
-                 window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
-               }}
-               size="large"
-               shape="round"
-             >
-               <span style={{ marginRight: 8 }} role="img" aria-label="support">
-                 💬
-               </span>
-               Support
-             </Button>
-           </Col>
-         </Row>
-
-         <Row align="middle" gutter={[4, 4]}>
-           <Col span={24}>
-             {
-
-               /*  if the local provider has a signer, let's show the faucet:  */
-               localProvider && localProvider.connection && localProvider.connection.url && localProvider.connection.url.indexOf(window.location.hostname)>=0 && !process.env.REACT_APP_PROVIDER && price > 1 ? (
-                 <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider}/>
-               ) : (
-                 ""
-               )
-             }
-           </Col>
-         </Row>
-       </div>
 
     </div>
   );
