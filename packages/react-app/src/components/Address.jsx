@@ -56,7 +56,7 @@ export default function Address(props) {
   if (props.onChange) {
     text = (
       <span editable={{ onChange: props.onChange }} copyable={{ text: props.value }}>
-        <a style={{ color: "#222222", fontSize: "8px", padding: "2px" }} target={"_blank"} href={etherscanLink} rel="noopener noreferrer">
+        <a style={{ color: "#ccc", fontSize: "8px", padding: "2px" }} target={"_blank"} href={etherscanLink} rel="noopener noreferrer">
           {displayAddress}
         </a>
       </span>
@@ -64,7 +64,7 @@ export default function Address(props) {
   } else {
     text = (
       <span copyable={{ text: props.value }}>
-        <a style={{ color: "#333", fontSize: "12px", padding: "2px" }} target={"_blank"} href={etherscanLink} rel="noopener noreferrer">
+        <a style={{ color: "#ccc", fontSize: "12px", padding: "2px" }} target={"_blank"} href={etherscanLink} rel="noopener noreferrer">
           {displayAddress}
         </a>
       </span>

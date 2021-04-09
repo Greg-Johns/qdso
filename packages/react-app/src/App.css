@@ -17,7 +17,7 @@ body {
 ul {
   padding-left: 0;
   color: #9E5E3A;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 ul li {
   list-style-type: none;
@@ -26,12 +26,25 @@ ul li {
 
 h1 {
   color: #9E5E3A;
-  font-size: 3.2rem;
+  font-size: 3rem;
 }
 h1 b {
   display: block;
   font-size: larger;
-  letter-spacing: -10px;
+  letter-spacing: -6px;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  height: 2px;
+  /* Set the hr color */
+  color: gold; /* old IE */
+  background-color: gold;
+}
+
+p {
+  margin: 0 12%;
 }
 
 a {
@@ -55,8 +68,11 @@ a {
   background-color: orange;
 }
 
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 668px){
   h1 {
-    font-size: 4rem;
+    font-size: 3.8rem;
+  }
+  p {
+    margin: 0 22%;
   }
 }
