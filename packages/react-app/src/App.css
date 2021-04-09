@@ -1,17 +1,62 @@
-.App {
-  text-align: center;
-  color: #E8EB4E;
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+
+body {
+  margin: 0;
 }
 
+.App {
+  /* color: #E8EB4E; */
+  width: 100vw;
+  background-color: #D7CDBE;
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  font-family: 'Arvo';
+}
+
+ul {
+  padding-left: 0;
+  color: #9E5E3A;
+  font-size: 1.2rem;
+}
 ul li {
   list-style-type: none;
+  font-weight: 800;
 }
 
 h1 {
-  color: #E8EB4E;
+  color: #9E5E3A;
+  font-size: 3.2rem;
+}
+h1 b {
+  display: block;
+  font-size: larger;
+  letter-spacing: -10px;
+}
+
+a {
+  display: inline-block;
+  padding: 12px;
+  margin: 8px;
+  color: #9E5E3A;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.sm {
+  font-size: .8rem;
+  margin: 0px;
+  padding: 0px;
+  color: #ccc;
 }
 
 .btn {
   color: white;
   background-color: orange;
+}
+
+@media only screen and (min-width: 768px){
+  h1 {
+    font-size: 4rem;
+  }
 }

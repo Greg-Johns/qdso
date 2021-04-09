@@ -8,6 +8,9 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
 // import QDSO from "views/QDSO";
+
+/** @jsx jsx */
+import { jsx, css } from '@emotion/react';
 import {
   useExchangePrice,
   useGasPrice,
@@ -179,7 +182,7 @@ function App(props) {
   let networkDisplay = ""
   if(localChainId && selectedChainId && localChainId != selectedChainId ){
     networkDisplay = (
-      <div style={{zIndex:2, position:'absolute', right:0,top:60,padding:16}}>
+      <div className="sm" style={{zIndex:2, position:'absolute', right:0,top:60,padding:16}}>
         <Alert
           message={"⚠️ Wrong Network"}
           description={(
@@ -194,7 +197,7 @@ function App(props) {
     )
   }else{
     networkDisplay = (
-      <div style={{zIndex:2, position:'absolute', right:154,top:28,padding:16,color:targetNetwork.color}}>
+      <div className="sm" style={{zIndex:2, position:'absolute', right:154,top:28,padding:16,color:targetNetwork.color}}>
         {targetNetwork.name}
       </div>
     )
@@ -228,7 +231,7 @@ function App(props) {
     && formatEther(yourLocalBalance)<=0
   ) {
     faucetHint = (
-      <div style={{padding:16}}>
+      <div className="sm" style={{padding:16}}>
         <Button type={"secondary"} onClick={()=>{
           faucetTx({
             to: address,
@@ -243,137 +246,67 @@ function App(props) {
   }
 
   return (
-    <div className="App">
-      {networkDisplay}
+    <div>
       <BrowserRouter>
-
-        <Menu style={{ textAlign:"left" }} selectedKeys={[route]} mode="horizontal">
-          <Menu.Item key="/">
-            <Link onClick={()=>{setRoute("/")}} to="/">Staker UI</Link>
-          </Menu.Item>
-          <Menu.Item key="/contracts">
-            <Link onClick={()=>{setRoute("/contracts")}} to="/contracts">Debug Contracts</Link>
-          </Menu.Item>
-          <Menu.Item key="/qdso">
-            <Link onClick={() => setRoute("/qdso")} to="/qdso">QDSO</Link>
-          </Menu.Item>
-        </Menu>
-
-        <Switch>
-          <Route exact path="/">
-
-          {completeDisplay}
-
-          <div style={{padding:8,marginTop:32}}>
-            <div>Timeleft:</div>
-            {timeLeft && humanizeDuration(timeLeft.toNumber()*1000)}
-          </div>
-
-          <div style={{padding:8}}>
-            <div>Total staked:</div>
-            <Balance
-              balance={stakerContractBalance}
-              fontSize={64}
-            />/<Balance
-              balance={threshold}
-              fontSize={64}
-            />
-          </div>
-
-
-          <div style={{padding:8}}>
-            <div>You staked:</div>
-            <Balance
-              balance={balanceStaked}
-              fontSize={64}
-            />
-          </div>
-
-
-          <div style={{padding:8}}>
-            <Button type={"default"} onClick={()=>{
-              tx( writeContracts.Staker.execute() )
-            }}>📡  Execute!</Button>
-          </div>
-
-          <div style={{padding:8}}>
-            <Button type={"default"} onClick={()=>{
-              tx( writeContracts.Staker.withdraw( address ) )
-            }}>🏧  Withdraw</Button>
-          </div>
-
-          <div style={{padding:8}}>
-            <Button type={ balanceStaked ? "success" : "primary"} onClick={()=>{
-              tx( writeContracts.Staker.stake({value: parseEther("0.5")}) )
-            }}>🥩  Stake 0.5 ether!</Button>
-          </div>
-
-
-
-            {/*
-                🎛 this scaffolding is full of commonly used components
-                this <Contract/> component will automatically parse your ABI
-                and give you a form to interact with it locally
-            */}
-
-            <div style={{width:500, margin:"auto",marginTop:64}}>
-              <div>Stake Events:</div>
-              <List
-                dataSource={stakeEvents}
-                renderItem={(item) => {
-                  return (
-                    <List.Item key={item[0]+item[1]+item.blockNumber}>
-                      <Address
-                          value={item[0]}
-                          ensProvider={mainnetProvider}
-                          fontSize={16}
-                        /> =>
-                        <Balance balance={item[1]} />
-                    </List.Item>
-                  )
-                }}
-              />
-            </div>
-          </Route>
-          <Route path="/contracts">
-            <Contract
-              name="Staker"
-              signer={userProvider.getSigner()}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-            />
-            <Contract
-              name="ExampleExternalContract"
-              signer={userProvider.getSigner()}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-            />
-          </Route>
-          <Route path="/qdso">
-            <QDSO />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-
-
-      {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
-       <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 0 }}>
-         <Account
-           address={address}
-           localProvider={localProvider}
-           userProvider={userProvider}
-           mainnetProvider={mainnetProvider}
-           price={price}
-           web3Modal={web3Modal}
-           loadWeb3Modal={loadWeb3Modal}
-           logoutOfWeb3Modal={logoutOfWeb3Modal}
-           blockExplorer={blockExplorer}
-         />
-         {faucetHint}
+      <div style={{padding: '4px', backgroundColor: '#333', width: '100vw'}}>
+        <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={() => setRoute("/qdso")} to="/qdso">QDSO</Link>
+        <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={()=>{setRoute("/contracts")}} to="/contracts">Debug Contracts</Link>
       </div>
+      <div className="App">
+        {networkDisplay}
+        
 
+          <Switch>
+            <Route exact path="/">
+              {completeDisplay}
+              <h1>home</h1>
+            </Route>
+            <Route path="/contracts">
+              <Contract
+                name="Staker"
+                signer={userProvider.getSigner()}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+              />
+              <Contract
+                name="ExampleExternalContract"
+                signer={userProvider.getSigner()}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+              />
+            </Route>
+            <Route path="/qdso">
+              <QDSO />
+            </Route>
+          </Switch>
+
+        {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
+        <div style={{
+            fontSize: ".8rem",
+            position: "fixed",
+            textAlign: "right",
+            right: 0,
+            top: 0,
+            padding: 0
+          }}>
+          <Account
+            address={address}
+            localProvider={localProvider}
+            userProvider={userProvider}
+            mainnetProvider={mainnetProvider}
+            price={price}
+            web3Modal={web3Modal}
+            loadWeb3Modal={loadWeb3Modal}
+            logoutOfWeb3Modal={logoutOfWeb3Modal}
+            blockExplorer={blockExplorer}
+          />
+          {faucetHint}
+        </div>
+
+      </div>
+      </BrowserRouter>
     </div>
   );
 }
