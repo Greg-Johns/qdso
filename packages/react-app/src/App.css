@@ -23,15 +23,27 @@ ul li {
   list-style-type: none;
   font-weight: 800;
 }
-
-h1 {
+h1, h4, h5, h6 {
   color: #9E5E3A;
+}
+h1 {
   font-size: 3rem;
 }
 h1 b {
   display: block;
   font-size: larger;
   letter-spacing: -6px;
+}
+h2, h3 {
+  color: gold;
+}
+h4 { 
+  font-size: 20px;
+  font-weight: 900;
+}
+h6 {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 hr {

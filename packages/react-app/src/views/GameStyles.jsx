@@ -1,7 +1,7 @@
 // import React, { useState } from "react";
 
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
 import { injectGlobal } from '@emotion/css'
 
 injectGlobal`
@@ -32,14 +32,12 @@ export const noise = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAA
 
 export const gameBoard = css`
   background-color: green;
+  background: linear-gradient(0, #36910D, #76BF75, #36910D);
+  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const playingArea = css`
-  border: 1px dashed pink;
 `;
 
 export const player = css`
@@ -49,27 +47,21 @@ export const player = css`
   border-radius: 50%;
 `;
 
-export const op = css`
-  width: 40px;
-  height: 40px;
-  border: 3px solid grey;
-  border-radius: 50%;
-`;
-
 export const opponents = css`
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
-  border-bottom: 2px solid gold;
+  border-bottom: 3px solid gold;
 `;
 
 export const bg = css`
-  max-width: 600px;
+  width: 100vw;
+  /* max-width: 600px; */
   text-align: center;
   height: 100vh;
   background-color: #D7CDBE;
 
-  @media (min-width: 600px) {
+  @media (min-width: 700px) {
     width: 80vw;
   }
 `;
@@ -109,6 +101,8 @@ export const posterImg = css`
 
 export const script = css`
   font-family: GloriaHallelujah;
+  position: relative;
+  top: 240px;
 `;
 
 export const rodeo = css`
@@ -131,6 +125,68 @@ export const trigger = css`
 
   &:hover {
     color: #CD4630;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 rgba(0, , 0, 0.4), 0 0 5px rgba(0, 0, 0, 0.2);
   }
+`;
+
+export const paper = css`
+  margin: 1px;
+  background-color: #fff;
+  box-shadow: -2px 2px 3px #2e422f;
+  border-radius: 2px;
+  width: 90vw;
+  height: 50vh;
+`;
+
+export const pokerChip = css`
+  margin: 1em 0;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 0 5px 1px rgba(0, 4, -4, 0.9), 0 0 3px 0 rgba(0, 4, -4, 0.9) inset;
+  border-radius: 50%;
+  font-size: 28px;
+  text-align: center;
+  font-weight: 900;
+  color: white;
+  border: 8px dashed #fff;
+`;
+
+export const redChip = css`
+  ${pokerChip}
+  background-color: #E24A4A;
+`;
+export const blueChip = css`
+  ${pokerChip}
+  background-color: #4A90E2;
+`;
+export const orangeChip = css`
+  ${pokerChip}
+  background-color: #FF664D;
+`;
+export const greenChip = css`
+  ${pokerChip}
+  background-color: #32860B;
+`;
+export const yellowChip = css`
+  ${pokerChip}
+  background-color: #eedf0a;
+`;
+export const purpleChip = css`
+  ${pokerChip}
+  background-color: #A84AE2;
+`;
+export const blankChip = css`
+  margin: 1em 0;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 28px;
+  text-align: center;
+  font-weight: 900;
+  color: #82cc88;
+  border: 8px dashed #82cc88;
 `;
