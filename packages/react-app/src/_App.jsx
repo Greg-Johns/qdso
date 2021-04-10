@@ -28,8 +28,8 @@ import {
 } from "./components";
 import { Transactor } from "./helpers";
 import { formatEther, parseEther } from "@ethersproject/units";
-import { Subgraph, QDSO } from "./views"
-import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
+import { Hints, ExampleUI, Subgraph, QDSO } from "./views"
+import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 
 const humanizeDuration = require("humanize-duration");
 /*
@@ -116,6 +116,52 @@ function App(props) {
   //const myMainnetBalance = useContractReader({DAI: mainnetDAIContract},"DAI", "balanceOf",["0x34aA3F359A9D614239015126635CE7732c18fDF3"])
   //
 
+  //keep track of contract balance to know how much has been staked total:
+  const stakerContractBalance = useBalance(localProvider, readContracts && readContracts.Staker.address);
+  if(DEBUG) console.log("💵 stakerContractBalance", stakerContractBalance )
+
+  //keep track of total 'threshold' needed of ETH
+  const threshold = useContractReader(readContracts,"Staker", "threshold" )
+  console.log("💵 threshold:",threshold)
+
+  // keep track of a variable from the contract in the local React state:
+  const balanceStaked = useContractReader(readContracts,"Staker", "balances",[ address ])
+  console.log("💸 balanceStaked:",balanceStaked)
+
+  //📟 Listen for broadcast events
+  const stakeEvents = useEventListener(readContracts, "Staker", "Stake", localProvider, 1);
+  console.log("📟 stake events:",stakeEvents)
+
+  // keep track of a variable from the contract in the local React state:
+  const timeLeft = useContractReader(readContracts,"Staker", "timeLeft")
+  console.log("⏳ timeLeft:",timeLeft)
+
+  const complete = useContractReader(readContracts,"ExampleExternalContract", "completed")
+  console.log("✅ complete:",complete)
+
+  const exampleExternalContractBalance = useBalance(localProvider, readContracts && readContracts.ExampleExternalContract.address);
+  if(DEBUG) console.log("💵 exampleExternalContractBalance", exampleExternalContractBalance )
+
+
+  let completeDisplay = ""
+  if(complete){
+    completeDisplay = (
+      <div style={{padding:64, backgroundColor:"#eeffef", fontWeight:"bolder"}}>
+        🚀 🎖 👩‍🚀  -  Staking App triggered `ExampleExternalContract` -- 🎉  🍾   🎊
+        <Balance
+          balance={exampleExternalContractBalance}
+          fontSize={64}
+        /> ETH staked!
+      </div>
+    )
+  }
+
+
+
+  /*
+  const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
+  console.log("🏷 Resolved austingriffith.eth as:",addressFromENS)
+  */
   let networkDisplay = ""
   if(localChainId && selectedChainId && localChainId != selectedChainId ){
     networkDisplay = (
@@ -186,32 +232,36 @@ function App(props) {
     <div>
       <BrowserRouter>
       <div style={{padding: '4px', backgroundColor: '#333', width: '100vw'}}>
-        <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={() => setRoute("/qsdo")} to="/qdso">QDSO</Link>
+        <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={() => setRoute("/qdso")} to="/qdso">QDSO</Link>
         <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={()=>{setRoute("/contracts")}} to="/contracts">Debug Contracts</Link>
       </div>
       <div className="App">
         {networkDisplay}
         
+
           <Switch>
             <Route exact path="/">
-              <h1>QDSO</h1>
+              {completeDisplay}
+              <h1>home</h1>
             </Route>
-            <Route exact path="/qdso" component={QDSO} />
             <Route path="/contracts">
               <Contract
-                name="Qdso"
+                name="Staker"
                 signer={userProvider.getSigner()}
                 provider={localProvider}
                 address={address}
                 blockExplorer={blockExplorer}
               />
               <Contract
-                name="NFTrophy"
+                name="ExampleExternalContract"
                 signer={userProvider.getSigner()}
                 provider={localProvider}
                 address={address}
                 blockExplorer={blockExplorer}
               />
+            </Route>
+            <Route path="/qdso">
+              <QDSO />
             </Route>
           </Switch>
 
@@ -237,11 +287,13 @@ function App(props) {
           />
           {faucetHint}
         </div>
+
       </div>
       </BrowserRouter>
     </div>
   );
 }
+
 
 /*
   Web3 modal helps us "connect" external wallets:

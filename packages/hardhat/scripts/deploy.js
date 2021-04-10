@@ -9,12 +9,15 @@ const main = async () => {
 
   console.log("\n\n 📡 Deploying...\n");
 
-  const exampleExternalContract = await deploy("ExampleExternalContract")
+  // const exampleExternalContract = await deploy("ExampleExternalContract")
 
-  const stakerContract = await deploy("Staker",[ exampleExternalContract.address ]) // <-- add in constructor args like line 16 vvvv
+  // const stakerContract = await deploy("Staker",[ exampleExternalContract.address ]) // <-- add in constructor args like line 16 vvvv
 
+  const qdsoContract = await deploy("Qdso");
 
-  //const secondContract = await deploy("SecondContract")
+  const nftrophyContract = await deploy("NFTrophy");
+
+  // const yourContract = await deploy("YourContract") // <-- add in constructor args like line 19 vvvv
 
   // const exampleToken = await deploy("ExampleToken")
   // const examplePriceOracle = await deploy("ExamplePriceOracle")

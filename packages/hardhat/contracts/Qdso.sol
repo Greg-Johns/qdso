@@ -1,15 +1,27 @@
 pragma solidity >=0.6.0 <0.7.0;
 
 import "hardhat/console.sol";
-import "./ExampleExternalContract.sol"; //https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
-contract Staker {
+contract Qdso {
 
-  ExampleExternalContract public exampleExternalContract;
+  uint public count;
 
-  constructor(address exampleExternalContractAddress) public {
-    exampleExternalContract = ExampleExternalContract(exampleExternalContractAddress);
+  // Function to get the current count
+  function get() public view returns (uint) {
+      return count;
   }
+
+  // Function to increment count by 1
+  function inc() public {
+      count += 1;
+  }
+
+  // Function to decrement count by 1
+  function dec() public {
+      count -= 1;
+  }
+
+  // Collect funds in a anteup() function
 
   // Collect funds in a payable `stake()` function and track individual `balances` with a mapping:
   // (make sure to add a `Stake(address,uint256)` event and emit it for the frontend <List/> display)
