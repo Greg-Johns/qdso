@@ -131,11 +131,13 @@ export const trigger = css`
 
 export const paper = css`
   margin: 1px;
-  background-color: #fff;
+  /* background-color: #fff; */
   box-shadow: -2px 2px 3px #2e422f;
   border-radius: 2px;
-  width: 90vw;
-  height: 50vh;
+  cursor: pointer;
+`;
+export const trophy = css`
+  width: 40vw;
 `;
 
 export const pokerChip = css`
