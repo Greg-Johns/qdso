@@ -25,7 +25,7 @@ const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https'})
 
 const DEBUG = true
 
-const targetNetwork = NETWORKS['localhost']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS['mumbai']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 const mainnetProvider = new JsonRpcProvider("https://mainnet.infura.io/v3/" + INFURA_ID)
 
@@ -66,8 +66,6 @@ const Yeehaw = ({props}) => {
   console.log(">>> balance:", balance)
 
   const awardWinner = async () => {
-    //foobar = svg img
-    // const result = await ipfs.add(JSON.stringify({ "foo": "bar" }));
     const result = await ipfs.add(JSON.stringify(winningDrawing));
     if(result && result.path) {
       tx( writeContracts.NFTrophy.mint(address, result.path));
@@ -82,7 +80,7 @@ const Yeehaw = ({props}) => {
   }, []);
 
   return (
-    <div>
+    <div css={st.bg}>
       <h4>Minting the winners drawing</h4>
       <CanvasDraw
         ref={canvasEl}

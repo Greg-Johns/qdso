@@ -13,7 +13,7 @@ const main = async () => {
 
   // const stakerContract = await deploy("Staker",[ exampleExternalContract.address ]) // <-- add in constructor args like line 16 vvvv
 
-  const qdsoContract = await deploy("Qdso");
+  const rncContract = await deploy("RandomNumberConsumer");
 
   const nftrophyContract = await deploy("NFTrophy");
 

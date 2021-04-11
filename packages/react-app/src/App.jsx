@@ -39,7 +39,8 @@ const humanizeDuration = require("humanize-duration");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS['localhost']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+// const targetNetwork = NETWORKS['localhost']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS['mumbai']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true
@@ -196,7 +197,7 @@ function App(props) {
             <Route exact path="/">
               <h1>QDSO</h1>
             </Route>
-            <Route exact path="/game">
+            <Route exact path="/qdso">
               <QDSO
                 name="NFTrophy"
                 signer={userProvider.getSigner()}

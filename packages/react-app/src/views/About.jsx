@@ -6,12 +6,19 @@ import * as st from "./GameStyles";
 import { jsx, css } from '@emotion/react';
 const About = () => {
   return (
-    <div>
+    <div css={st.bg}>
       <Link to="/qdso">
         Home
       </Link>
-      <h1>About</h1>
-      <h2>QDSO</h2>
+      <h1>About QDSO</h1>
+      <p>
+        QDSO is a experiment in
+        gaming using blockchains
+        smart contracts
+        &
+        ERC-721’s
+        (non-fungible tokens)
+      </p>
       <a href="https://github.com/Greg-Johns/qdso">Github</a>
     </div>
   )

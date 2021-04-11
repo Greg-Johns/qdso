@@ -1,20 +1,54 @@
 import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
+import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import CanvasDraw from "react-canvas-draw";
 import { Link, useHistory } from "react-router-dom";
 // import Canvas from "../components/Canvas";
+import {
+  useGasPrice,
+  useUserProvider,
+  useContractLoader,
+  useContractReader,
+  useEventListener,
+  useBalance,
+  useExternalContractLoader
+} from "../hooks";
+import { Transactor } from "../helpers";
+import { formatEther, parseEther } from "@ethersproject/units";
+import { INFURA_ID, NETWORK, NETWORKS } from "../constants";
 import * as st from "./GameStyles";
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
 
+const DEBUG = true
+
+const targetNetwork = NETWORKS['mumbai']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+
+const localProviderUrl = targetNetwork.rpcUrl;
+
+const localProviderUrlFromEnv = process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : localProviderUrl;
+
+const localProvider = new JsonRpcProvider(localProviderUrlFromEnv);
+
 const Game = () => {
+  const [injectedProvider, setInjectedProvider] = useState();
   const wordsArray = ['cat', 'dog', 'mouse'];
   const canvasEl = useRef(null);
   const history = useHistory();
 
-  const getRandomWord = () => {
-    console.log("word up")
+  const gasPrice = useGasPrice(targetNetwork,"fast");
+  const userProvider = useUserProvider(injectedProvider, localProvider);
+  const tx = Transactor(userProvider, gasPrice)
+
+  const writeContracts = useContractLoader(userProvider)
+  if(DEBUG) console.log("writeContracts", writeContracts)
+
+  const getRandomWord = async () => {
+    const result = await tx( writeContracts.RandomNumberConsumer.getRandomNumber(92834571));
+    if(result) {
+      console.log("RESULT:", result)
+    }
   }
 
   return (
