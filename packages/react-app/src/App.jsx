@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import {  JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
+import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import "./App.css";
 import { Row, Col, Button, Menu, Alert, List } from "antd";
 import Web3Modal from "web3modal";
@@ -124,7 +124,7 @@ function App(props) {
           message={"⚠️ Wrong Network"}
           description={(
             <div>
-              You have <b>{NETWORK(selectedChainId).name}</b> selected and you need to be on <b>{NETWORK(localChainId).name}</b>.
+              You have <b>{NETWORK(selectedChainId)?.name}</b> selected and you need to be on <b>{NETWORK(localChainId)?.name}</b>.
             </div>
           )}
           type="error"
@@ -196,7 +196,14 @@ function App(props) {
             <Route exact path="/">
               <h1>QDSO</h1>
             </Route>
-            <Route exact path="/qdso" component={QDSO} />
+            <Route exact path="/game">
+              <QDSO
+                name="NFTrophy"
+                signer={userProvider.getSigner()}
+                provider={localProvider}
+                address={address} 
+              />
+            </Route>
             <Route path="/contracts">
               <Contract
                 name="Qdso"

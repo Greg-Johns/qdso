@@ -10,7 +10,7 @@ import Yeehaw from "./Yeehaw";
 import ArtBoard from "./ArtBoard";
 import LeaderBoard from "./LeaderBoard";
 
-const QDSO = () => {
+const QDSO = (props) => {
   return (
       <div>
         <BrowserRouter>
@@ -19,8 +19,12 @@ const QDSO = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/how" component={How} />
             <Route exact path="/wanted" component={Wanted} />
-            <Route exact path="/game" component={Game} />
-            <Route exact path="/yeehaw" component={Yeehaw} />
+            <Route exact path="/game">
+              <Game />
+            </Route>
+            <Route exact path="/yeehaw">
+              <Yeehaw props={props} />
+            </Route>
             <Route exact path="/leaderboard" component={LeaderBoard} />
             <Route exact path="/artboard" component={ArtBoard} />
           </Switch>

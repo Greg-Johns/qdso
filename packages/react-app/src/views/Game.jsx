@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Canvas from "../components/Canvas";
 import * as st from "./GameStyles";
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
 
+
 const Game = () => {
+  const wordsArray = ['cat', 'dog', 'mouse'];
+  
   return (
     <div css={st.gameBoard}>
       <hr />
         <h3>Welcome</h3>
         <h2>Player 3</h2>
         <span css={st.orangeChip}>4</span>
-        <p css={st.script}>Still waiting on 2 more players</p>
-        <canvas  css={st.paper}></canvas>
+        {/* <p css={st.script}>Still waiting on 2 more players</p> */}
+        <Canvas
+          // css={st.paper}
+        />
         <div css={st.opponents}>
           <span css={st.redChip}>1</span>
           <span css={st.yellowChip}>2</span>
