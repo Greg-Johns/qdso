@@ -9,7 +9,7 @@ import { jsx, css } from '@emotion/react';
 const LeaderBoard = () => {
   return (
     <div>
-      <Link to="/qdso">
+      <Link to="/">
         Home
       </Link>
       <h1>Leader Board</h1>

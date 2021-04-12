@@ -90,7 +90,7 @@ const Yeehaw = ({props}) => {
         canvasWidth="88vw"
       />
 
-      <Link to="/qdso">
+      <Link to="/">
         Home
       </Link>
       <Link to="/leaderboard">

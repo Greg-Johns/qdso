@@ -8,7 +8,7 @@ import { jsx, css } from '@emotion/react';
 const ArtBoard = () => {
   return (
     <div>
-      <Link to="/qdso">
+      <Link to="/">
         Home
       </Link>
       <h1>Art Board</h1>

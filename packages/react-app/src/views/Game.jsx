@@ -97,7 +97,7 @@ const Game = () => {
       >
         End Game
       </button>
-      <Link className="sm" to="/qdso">
+      <Link className="sm" to="/">
         Home
       </Link>
     </div>

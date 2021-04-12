@@ -195,9 +195,6 @@ function App(props) {
         
           <Switch>
             <Route exact path="/">
-              <h1>QDSO</h1>
-            </Route>
-            <Route exact path="/qdso">
               <QDSO
                 name="NFTrophy"
                 signer={userProvider.getSigner()}

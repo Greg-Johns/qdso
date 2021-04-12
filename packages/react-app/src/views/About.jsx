@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react';
 const About = () => {
   return (
     <div css={st.bg}>
-      <Link to="/qdso">
+      <Link to="/">
         Home
       </Link>
       <h1>About QDSO</h1>

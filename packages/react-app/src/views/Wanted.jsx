@@ -10,7 +10,7 @@ const Wanted = () => {
     <div css={st.bg}>
       <div css={st.poster}>
         <h1><span css={st.rodeo}>Wanted</span></h1>
-        <Link to="/qdso">Home</Link>
+        <Link to="/">Home</Link>
         <h4>All Crypto Artists:</h4>
         <h6>Anti-up</h6>
         <p>
