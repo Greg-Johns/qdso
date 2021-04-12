@@ -23,10 +23,12 @@ see [Figma file](https://www.figma.com/file/FUBlKL9Vjra4EqmmfFzZJNg8/qdso?node-i
 
 [demo](https://qdso.surge.sh/)
 
+[Quick Video of QDSO](https://www.youtube.com/watch?v=QOlD4uq862Q)
+
 Architecture diagram
 
 ## Setup and running project
-required: Node plus Yarn and Git
+required: Node, Yarn and Git
 
 clone project and terminal into the project directory and run the following commands:
 ```
