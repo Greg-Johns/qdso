@@ -187,7 +187,7 @@ function App(props) {
     <div>
       <BrowserRouter>
       <div style={{padding: '4px', backgroundColor: '#333', width: '100vw'}}>
-        <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={() => setRoute("/qsdo")} to="/qdso">QDSO</Link>
+        <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={() => setRoute("/qsdo")} to="/">QDSO</Link>
         <Link style={{margin: '4px', color: '#fff'}} className="sm" onClick={()=>{setRoute("/contracts")}} to="/contracts">Debug Contracts</Link>
       </div>
       <div className="App">

@@ -4,7 +4,7 @@
 
 QDSO is a experiment in gaming using blockchains, smart contracts & [ERC-721’s](https://eips.ethereum.org/EIPS/eip-721).
 
-
+![gameplay](./packages/react-app/src/assets/round_play.png)
 
 ## Rules
 It’s pretty simple, kind of like a virtual pictionary. It goes like this:
@@ -17,6 +17,8 @@ Six players ante up in to the pot (deposit funds in game contract) where it’s 
 
 Bounty:
 The winner gets their drawing minted into their very own NFTrophy paid for from the pot. Alternatively the winning player could also select one of the other players drawings to mint. This could ruffle some feathers so the game should allow for a duel mode that let's a player challenge another for any of their NFTrophies where both players are given 6 words to draw while the other 4 players divided into two guessing teams for the dueling drawers.
+
+![duel](./packages/react-app/src/assets/duel.png)
 
 ## Concept Design
 see [Figma file](https://www.figma.com/file/FUBlKL9Vjra4EqmmfFzZJNg8/qdso?node-id=289%3A81)
