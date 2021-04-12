@@ -21,7 +21,7 @@ The winner gets their drawing minted into their very own NFTrophy paid for from 
 ## Concept Design
 see [Figma file](https://www.figma.com/file/FUBlKL9Vjra4EqmmfFzZJNg8/qdso?node-id=289%3A81)
 
-Link to video
+[Quick Video of QDSO](https://www.youtube.com/watch?v=QOlD4uq862Q)
 
 Link to live demo
 
